@@ -17,7 +17,7 @@
     line-height: 25px;
 }
 .page a{
-    width: 18px;
+    min-width: 25px;
     margin-left: 5px;
 }
 .page a.current{
