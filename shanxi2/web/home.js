@@ -11,4 +11,3 @@ $('.product-wrap .swiper-container').each(function () {
 		spaceBetween: 30
 	});
 });
-
