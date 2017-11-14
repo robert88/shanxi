@@ -1,35 +1,26 @@
 ;
 (function () {
 
-	function getNavClass(href) {
-		var map ={
-			"1home":"nav1",
-			"2list":"nav2",
-			"3article":"nav3",
-			"4back":"nav4",
-			"":"nav5",
-			"":"nav6",
-			"":"nav7",
-			"":"nav8",
-			"":"nav9",
-			"":"",
-			"":"",
-			"":"",
-		}
-		for(var i in map){
-            if( ~href.indexOf(i) ){
-            	return map[i];
-			}
-		}
-		return map["01home"]
-    }
-
-	function setNav(){
-		var current  = getNavClass(window.location.href);
-		$("html").addClass(current)
+	//等比
+	function getResize(max, min, cur, maxCur, minCur) {
+		return (cur - min) * (maxCur - minCur) / (max - min) + minCur;
 	}
-    setNav();
 
+	//获取范围
+	function getRagen(val, max, min) {
+		return (val <= min) ? min : ((val <= max) ? val : max);
+	}
+	/*
+	*refrence,refrenceMax,refrenceMin,setMax,setMin
+	*/
+	function changeRootrem(obj,callback) {
+		var val = getRagen(obj.refrence, obj.refrenceMax, obj.refrenceMin);
+		var rem = getResize(obj.refrenceMax, obj.refrenceMin,val, obj.setMax, obj.setMin);
+		if(typeof callback=="function"){
+			callback(rem)
+		}
+	}
+/*TAB*/
 	$(document).on("click",".tab-wrap>.tab-head>.tab-head-item",function(){
 
 		var $this = $(this);
@@ -73,18 +64,53 @@
 		return false;
 	});
 
+	/*SELECT*/
+	$(document).on("click",".selectWrap .select",function(){
 
-	$('.bannar-carousel .swiper-container').each(function () {
-		new Swiper($(this), {
-			autoplay:3000,
-			speed: 1000,
-			pagination: '.swiper-pagination',
-			paginationBulletRender: function (swiper, index, className) {
-				return '<span class="' + className + '"></span>';
-			},
-			paginationClickable:true
-		});
+		var $this = $(this);
+		//取消切换
+		if($this.hasClass("disabled") ){
+			return false;
+		}
+
+		var $parent = $this.parents(".selectWrap");
+		if($parent.hasClass("active")){
+			$(".selectWrap").removeClass("active");
+		}else{
+			$(".selectWrap").removeClass("active");
+			$parent.addClass("active");
+		}
+
+	}).on("click",".selectWrap .option p",function(){
+		var $this = $(this);
+		var text = $this.html().trim();
+		var val = $this.attr("value");
+		var $parent = $this.parents(".selectWrap");
+		$parent.find(".selectValue").val(val).change();
+		var $text = $parent.find(".selectText")
+		if($text[0].nodeName=="INPUT"){
+			$text.val(text);
+		}else{
+			$text.html(text);
+		}
+		$(".selectWrap").removeClass("active");
 	});
+
+	function changeRem() {
+		changeRootrem({
+			refrence:$(window).width(),
+			refrenceMax:640,
+			refrenceMin:300,
+			setMax:125,
+			setMin:75,
+		},function(rem){
+			$("html").css("font-size", rem + "%");
+		});
+	}
+	$(window).on("resize",function () {
+		changeRem();
+	});
+	changeRem()
 })();
 
 

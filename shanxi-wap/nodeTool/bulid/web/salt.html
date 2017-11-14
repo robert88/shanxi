@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE8">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="telephone=no" name="format-detection">
+
+		<!--start mergeCss:main.min-->
+		<link rel="stylesheet" type="text/css" href="/public/css/common/base.css">
+		<link rel="stylesheet" type="text/css" href="/public/css/common/main.css">
+		<link rel="stylesheet" type="text/css" href="/public/css/skin/main_color.css">
+		<!--end mergeCss-->
+
+		<!--start mergeJs:lib.min-->
+		<script src="/public/js/lib/jquery-1.12.4.js"></script>
+		<script src="/public/js/common/prototype.js"></script>
+		<script src="/public/js/common/base.js"></script>
+		<script src="/public/js/common/config.js"></script>
+		<script src="/public/js/common/main.js"></script>
+		<!--end mergeJs-->
+
+
+</head>
+
+<body>
+
+	<style  type='text/css'>@charset "UTF-8"; /*../web/salt.css*/.list li img{ height: 10rem; } .list li .text{ background:#d4d4d4; line-height: 2.7777777777777777rem; } .list li .text-wrap{ overflow: hidden; margin: 0 0.625rem; background:#efefef; } .loadMore{ background:#d4d4d4; line-height: 2.7777777777777777rem; }</style>
+	<div class="header wrap shadow-10">
+<a  class="back" onclick="history.back(-1)"><i></i>回首页</a><span class="title">食盐家族</span>
+</div>
+
+<div class="tab-wrap wrap">
+	<ul class="tab-head col">
+		<li class="tab-head-item active col6" >
+			<div class="selectWrap">
+				<div class="select">
+					<input type="hidden" class="selectValue">
+					<div type="text" class="selectText">食盐</div>
+					<div class="selectBtn">▼</div>
+				</div>
+				<div class="option">
+					<p value="a">食盐</p>
+					<p value="b">深井海藻</p>
+				</div>
+			</div>
+		</li>
+		<li class="tab-head-item col6">销售热线</li>
+	</ul>
+	<ul class="tab-body pl10 pr10 news">
+		<!--start 好友排名-->
+		<li class="tab-body-item active">
+			<ul class="list tc col">
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt01.png" alt="">
+						<p class="text">深井海藻碘盐</p>
+					</div>
+				</li>
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt02.png" alt="">
+						<p class="text">精制盐</p>
+					</div>
+				</li>
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt03.png" alt="">
+						<p class="text">螺旋藻碘盐</p>
+					</div>
+				</li>
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt01.png" alt="">
+						<p class="text">海藻精制盐（无碘）</p>
+					</div>
+				</li>
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt01.png" alt="">
+						<p class="text">海藻精制盐（无碘）</p>
+					</div>
+				</li>
+				<li class="col6 mt20">
+					<div class="text-wrap">
+						<img src="/public/images/salt01.png" alt="">
+						<p class="text">海藻精制盐（无碘）</p>
+					</div>
+				</li>
+			</ul>
+			<div class="loadMore tc mt20 mb20">加载更多</div>
+		</li>
+	</ul>
+</div>
+	<script>$(function(){;(function(){ var innerModule = {};var innerRequire = function(index){ return innerModule[index]; }; /*../web/salt.js*/(function() {
+    (function() {
+        function getHtml(obj) {
+            return [ '<li class="col6 mt20">', '<div class="text-wrap">', '<img src="{0}" alt="">', '<p class="text">{1}</p>', "</div>", "</li>" ].join("").tpl(obj.img, obj.text);
+        }
+        var loading;
+        $(".loadMore").on("touchstart mousedown", function() {
+            if (loading) {
+                return;
+            }
+            loading = true;
+            $("loading").show();
+            $.ajax({
+                url: "/api/json",
+                success: function(ret) {
+                    if (ret && ret.data) {
+                        for (var i = 0; i < ret.data.length; i++) {
+                            $(".list").append(getHtml(ret.data[i]));
+                        }
+                    }
+                },
+                complete: function() {
+                    loading = false;
+                    $("loading").hide();
+                }
+            });
+        });
+    })();
+})();})();})</script>
+
+    <div id="pageLoad">
+        <div class="loader">
+            <div class="loader-inner line-scale-pulse-out">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    
+
+	</body>
+
+</html>
