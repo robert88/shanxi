@@ -14,7 +14,7 @@ $('.bannar-carousel .swiper-container').each(function () {
 });
 
 $('.product-wrap .swiper-container').each(function () {
-	new Swiper($(this), {
+	var swiper = new Swiper($(this), {
 		pagination: '.swiper-pagination',
 		slidesPerView: 4,
 		nextButton: ".swiper-button-next",
@@ -22,6 +22,9 @@ $('.product-wrap .swiper-container').each(function () {
 		autoplay:3000,
 		paginationClickable: true,
 		spaceBetween: 30
+	});
+	$(this).parents(".tab-body-item").on("show",function(){
+		swiper.resize();
 	});
 });
 $(".index-banner-video .close").click(function () {
