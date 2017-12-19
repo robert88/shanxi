@@ -5,7 +5,7 @@ $('.bannar-carousel .swiper-container').each(function () {
 	new Swiper($(this), {
 		autoplay:3000,
 		speed: 1000,
-		pagination: '.swiper-pagination',
+		pagination: '.bannar-carousel  .swiper-pagination',
 		paginationBulletRender: function (swiper, index, className) {
 			return '<span class="' + className + '"></span>';
 		},
@@ -15,7 +15,7 @@ $('.bannar-carousel .swiper-container').each(function () {
 
 $('.product-wrap .swiper-container').each(function () {
 	var swiper = new Swiper($(this), {
-		pagination: '.swiper-pagination',
+		pagination: '.product-wrap .swiper-pagination',
 		slidesPerView: 4,
 		nextButton: ".swiper-button-next",
 		prevButton: ".swiper-button-prev",
