@@ -34,3 +34,10 @@ $(".index-banner-video .close").click(function () {
 	}
 	$(this).parent().hide();
 });
+$(".swiper-container-img").each(function(){
+	new Swiper($(this), {
+	pagination:'.swiper-container-img .swiper-pagination',
+	paginationBulletRender: function (swiper, index, className) {
+		return '<span class="' + className + '"></span>';
+	}});
+})
