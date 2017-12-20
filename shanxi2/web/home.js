@@ -24,7 +24,7 @@ $('.product-wrap .swiper-container').each(function () {
 		spaceBetween: 30
 	});
 	$(this).parents(".tab-body-item").on("show",function(){
-		swiper.resize();
+		swiper.onResize();
 	});
 });
 $(".index-banner-video .close").click(function () {
