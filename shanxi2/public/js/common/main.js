@@ -42,7 +42,7 @@
 		$allHeadItem.removeClass("active");
 		$allBodyItem.removeClass("active");
 		$this.addClass("active");
-		$allBodyItem.eq(curIndex).addClass("active").triggle("show");
+		$allBodyItem.eq(curIndex).addClass("active").trigger("show");
 		return false;
 	});
 
